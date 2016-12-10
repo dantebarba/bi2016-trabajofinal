@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 @Repository
 public class MongoDb {
@@ -32,7 +33,10 @@ public class MongoDb {
 	}
 
 	private Jongo getJongo() {
-		DB db = new MongoClient().getDB("CiudadDeBuenosAires");
+		MongoClient mongo = new MongoClient(
+				  new MongoClientURI( "mongodb://dantebarba:123456@ds129038.mlab.com:29038/ciudaddebuenosaires" )
+				);
+		DB db = mongo.getDB("ciudaddebuenosaires");
 		Jongo jongo = new Jongo(db);
 		return jongo;
 	}
